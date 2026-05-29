@@ -48,13 +48,16 @@ Be careful to not glue the front and text layer. It will show.
 
 ## Software
 
-Change settings.h and platform.ini to your own configuration
+Create a `settings.h` based on `settings.h.template`. You can show a 'happy birthday' on given dates as transition.
+
+Create a `platformio-local.ini` in the same manner. This allows for using your own password for OTA updates.
+
 
 Compile, run and upload using Visual Studio Code with PlatformIO as plugin.
 
 When started, connect to Wifi network 'Clock' and navigate to 192.168.4.1 to configure the Clock for first use. After that, reconnect to a regular Wifi network and open the browser on the assigned IP address.
 
-Once your clock is closed up you can only update via OTA.
+Once your clock is closed up (assembled) you can only update via OTA.
 
 ## Pin layout
 
@@ -68,7 +71,22 @@ Once your clock is closed up you can only update via OTA.
 
 The settings buttons will allow you to configure the clock on a basic level. To configure on a finer level, just open the browser to the clock (not very reactive, since the clock is working on showing you the time and transitions) or use the Home Assistant integration (just configure MQTT via the browser, run a MQTT server and let Home Assistant read from that server).
 
-TODO button behavior
+### Configuration
+
+Press SELECT once to enter settings mode. Press NEXT to cycle through the options of the setting or press SELECT again for the next setting or for closing the settings mode.
+
+Settings are:
+1. Change clockface
+1. Change transition
+1. Activate or disable light sensor
+1. Activate or disable seconds
+1. Set transition time 
+
+Active = white, disabled = blue.
+
+### Reset
+
+Press NEXT, followed by SELECT. Lower left LED will turn green. Keep pressed and the LED will turn orange. When it turns red after 5 seconds, the clock and network will reset. You have to reconnect to the AP 'Clock' after that.
 
 ## Attibutes
 

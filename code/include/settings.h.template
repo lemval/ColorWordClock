@@ -1,0 +1,22 @@
+#ifndef SETTINGS_h
+#define SETTINGS_h
+
+#include <Timezone.h>
+
+// Define your personal OTA password
+#define OTA_PASSWORD "MySecret"
+
+#define TEST_MODE false
+
+// Do not zero-prefix the DDMM values of birthdays!
+const int birthdays[2] = {101, 3112};
+
+// Set the language for the birthday transition: 0 = EN, 1 = NL
+const int language = 0;
+
+// Configure your timezone here. Currently: Europe/Amsterdam
+// HOWTO at https://github.com/JChristensen/Timezone
+inline TimeChangeRule getStandard() { return {"CET", Last, Sun, Oct, 2, 60}; }
+inline TimeChangeRule getDaylightSaving() { return {"CEST", Last, Sun, Mar, 2, 120}; }
+
+#endif

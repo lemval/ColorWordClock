@@ -1,0 +1,4 @@
+upload_port = 192.168.x.x
+upload_flags = 
+	--port=55910
+	--auth=<OTA_PASSWORD from settings.h>
