@@ -61,11 +61,11 @@ Once your clock is closed up (assembled) you can only update via OTA.
 
 ## Pin layout
 
-04 Settings - select (connect other side to GND)
-05 Settings - next (connect other side to GND)
-06 Light sensor (3.3V - LDR  - SENSOR - 4K7 - GND)
-19 LED strip - clock
-20 LED strip - data
+* 04 Settings - select (connect other side to GND)
+* 05 Settings - next (connect other side to GND)
+* 06 Light sensor (3.3V - LDR  - SENSOR - 4K7 - GND)
+* 19 LED strip - clock
+* 20 LED strip - data
 
 ## Control
 
