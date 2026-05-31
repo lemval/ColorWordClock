@@ -4,7 +4,7 @@ Instructions to build the clock.
 
 ## Groundwork
 
-Start out with a square [ground layer](../design/ClockLayers v2 layer1 base6 2x300x100.svg), optionally with holes for small bolts to join the layers. Optionally burn the [guide lines](../design/ClockLayers v2 layer1a base6 1x3000x20.svg) on this ground layer to correctly position the LEDs. Glue the [led layer](../design/ClockLayers v2 layer2 mdf2 1x400x100.svg) atop of it and make sure the lanes are straigh. You can use the cut out part for this, but make sure this part is not glued to the ground layer.
+Start out with a square [ground layer](../design/ClockLayers%20v2%20layer1%20base6%202x300x100.svg), optionally with holes for small bolts to join the layers. Optionally burn the [guide lines](../design/ClockLayers%20v2%20layer1a%20base6%201x3000x20.svg) on this ground layer to correctly position the LEDs. Glue the [led layer](../design/ClockLayers%20v2%20layer2%20mdf2%201x400x100.svg) atop of it and make sure the lanes are straigh. You can use the cut out part for this, but make sure this part is not glued to the ground layer.
 
 The result is something like this:
 ![Ground and LED layer with LED strip](images/Start.jpg "The first step")
@@ -20,15 +20,31 @@ This hence and forth positioning is called 'serpentine'.
 Position the last four LEDs in the corners while taking the direction of the data line into account. The order is: bottom right, bottom left, top left, top right.
 
 The result is something like this:
-![Ground and LED layer with LED strip](images/Leds added.jpg "The second step")
-
+![Ground and LED layer with LED strip](images/Leds%20added.jpg "The second step")
 
 ## Wiring and cutting
 
-Cut open the lane on the left side. This allows the wiring for the corner LEDs. Use preferrably different colors for power, ground, data and clock. 
+Cut open the lane on the left side. This allows the wiring for the corner LEDs. Use preferrably different colors for power, ground, data and clock. Solder the corner LEDs like the image below. On the bottom side of the clock you need extra length for power and ground to weld the power connector in place. On the top side make sure the wires need to be placed at the side of the open space, otherwise the ESP won't fit. Glue down these wires to the wood.
 
-...
+Next wire the LED strips ground to ground, power to power, clock out to clock in, data out to data in.
 
+For the ESP I used bended pin headers (male) and wires with pin headers (female). You can optionally directly solder the wires to the ESP. Cut the wires in the right length and attach the LED strips. Do not yet attach the light sensor and switches.
 
 The result is something like this:
 ![Wired result](images/Soldering.jpg "The third step")
+
+## Connecting the ESP
+
+...
+
+## Sensor and switches
+
+...
+
+## Front plate
+
+...
+
+## Frame
+
+...
