@@ -91,7 +91,7 @@ Active = white, disabled = blue.
 
 Press NEXT, followed by SELECT. Lower left LED will turn green. Keep pressed and the LED will turn orange. When it turns red after 5 seconds, the clock and network will reset. You have to reconnect to the AP 'Clock' after that.
 
-## Attibutes
+## Attributes
 
 The following components or libraries are used:
 
