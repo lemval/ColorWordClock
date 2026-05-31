@@ -13,7 +13,9 @@ The layout of the clock is Dutch! However, it will be pretty easy to create the 
 Besides some small stuff, you need the following as mentioned below. Costs will be between 50 and 100 euro on material.
 
 ### Board
-Using model esp32-c6 16MB Devkit, which is easy to use and connect (although it is larger in size). You could currently use a 8MB model if you like (4MB will not be enough unless you disable OTA and use a different partition table). 
+The clock can fit a model esp32-c6 devkit, which is easy to use and to connect, although the devkit is larger in size.
+ 
+You need at least a 4MB card, however it has only be tested on a 8MB and 16MB card. If you skip OTA capability (you then have to disassemble the clock to update!) you can use a 2MB card.
 
 ### Light sensor
 Using model 5516, Power with 3.3V and place a 4K7 resistor between data and ground (3.3V - LDR  - SENSOR - 4K7 - GND).
@@ -52,6 +54,7 @@ Create a `settings.h` based on `settings.h.template`. You can show a 'happy birt
 
 Create a `platformio-local.ini` in the same manner. This allows for using your own password for OTA updates.
 
+Change to your board size in `platformio.ini` by using one of the preconfigured board size config files (set to 16MB standard).
 
 Compile, run and upload using Visual Studio Code with PlatformIO as plugin.
 
