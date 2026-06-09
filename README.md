@@ -16,6 +16,9 @@ This is the first version I've build. It uses an aluminium U-frame to hold all l
 
 All configurations can be done via the website on the clock.
 
+[![Check the movie](instructions/images/ClockMovie.png)](instructions/images/ClockMovie.mp4)!
+
+
 ### Faces
 
 1. Warm (text is warm white)
