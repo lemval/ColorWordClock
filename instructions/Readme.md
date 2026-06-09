@@ -45,17 +45,17 @@ Connect a red wire to 5V on C and a black wire to GND on A. This powers the boar
 
 Pin 19 and 20 make up the clock and data. These need also be soldered to the LED strip. Best to use the same colors as used for connecting the parts of the LED strip (green for clock, blue for data).
 
-The light sensor uses header A, connected like: `3.3V - LDR - SENSOR - 4K7 - GND`. Orange represents 3V3, purple the data and brown ground.
+The light sensor uses header A connected like: `3.3V - LDR - SENSOR - 4K7 - GND`. Orange represents 3V3, purple the data and brown ground. Connect as specified and use shrinking material or tape to isolate.
 
 The yellow wire is connected to the switch for `select` and green for `next`. The switches should be connected to ground on the other terminal. On the picture, this is also a brown wire, which is connected to the LED strip.
 
 Make sure all wires can be nicely placed flat enough for the placement of the control layer.
 
 The layout of your ESP can be found online. For example:
-![ESP C6 pinout](images/ESP32-C6 "Credits unknown")
+![ESP C6 pinout](images/ESP32-C6.jpg "Credits unknown")
 
 The result is something like this:
-![Connecting ESP](images/ESP32-wiring.jpg "The fourth step")
+![Connecting ESP](images/ESP-wiring.jpg "The fourth step")
 
 ## Control layer and front plate
 

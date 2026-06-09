@@ -52,13 +52,17 @@ The status bar is by default the date in binary. You have the option for some fi
 
 Besides some small stuff, you need the following as mentioned below. Costs will be between 50 and 100 euro on material.
 
+Instructions for building the clock are found in the [instruction folder](instructions/Readme.md).
+
 ### Board
+
 The clock can fit a model esp32-c6 devkit, which is easy to use and to connect, although the devkit is larger in size.
  
 You need at least a 4MB card, however it has only be tested on a 8MB and 16MB card. If you skip OTA capability (you then have to disassemble the clock to update!) you can use a 2MB card.
 
 ### Light sensor
-Using model 5516, power with 3.3V and place a 4K7 resistor between data and ground (3.3V - LDR  - SENSOR - 4K7 - GND).
+
+Use a model 5516 in combination with a 4K7 resistor.
 
 ### LED strip
 You need 173 leds (13 x 13 + 4) on a 60D RGB strip, totaling to 3 meter. Use model HD107HD/APA107 (60 leds per meter) or alike, but make sure you can cut each LED individually. Using another model means also changing led_array.h (at FastLED.addLeds).
