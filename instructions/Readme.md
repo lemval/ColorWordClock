@@ -35,15 +35,42 @@ The result is something like this:
 
 ## Connecting the ESP
 
-...
+I use standard bend headers for connecting the ESP in combination with female jumper wires for DIY kits.
 
-## Sensor and switches
+Place a header (A) of 6 on GND/3V3/RST/4/5/6.  
+Place a header (B) of 2 on 13/5V.  
+Place a header (C) of 6 on 5V/GND/9/18/19/20.
 
-...
+Connect a red wire to 5V on C and a black wire to GND on A. This powers the board. Connect the other side of these wires to the LED strip. Make sure you know how to position the board and use lengths accordingly. Initially I had the board flipped over the long side, but this is better for accessibility.
 
-## Front plate
+Pin 19 and 20 make up the clock and data. These need also be soldered to the LED strip. Best to use the same colors as used for connecting the parts of the LED strip (green for clock, blue for data).
 
-...
+The light sensor uses header A, connected like: `3.3V - LDR - SENSOR - 4K7 - GND`. Orange represents 3V3, purple the data and brown ground.
+
+The yellow wire is connected to the switch for `select` and green for `next`. The switches should be connected to ground on the other terminal. On the picture, this is also a brown wire, which is connected to the LED strip.
+
+Make sure all wires can be nicely placed flat enough for the placement of the control layer.
+
+The layout of your ESP can be found online. For example:
+![ESP C6 pinout](images/ESP32-C6 "Credits unknown")
+
+The result is something like this:
+![Connecting ESP](images/ESP32-wiring.jpg "The fourth step")
+
+## Control layer and front plate
+
+Guide all wires for the ESP, switches and sensor though the large open section and make sure the control layer is placed flat on the LED layer. Fixate the three layers. For example, use bolts and nuts. Make sure the front is flat by sinking the bolt head in the wood. Drill very carefully.
+
+Attach the ESP if you didn't already do that and use tape to make sure the front is flat. This takes some fitting, nudging and tweaking.
+
+Test the clock, make sure it is working.
+
+Optionally add the switches and the light sensor. 
+
+Paint the front plate in the color of your choice. Black is safe and beautiful. Let it dry and lasercut it. Spray-glue the back and attach the tracing paper (this paper diffuses the light, you need it!).
+
+The result is something like this:
+![Control layer attached](images/ledboard.jpg "The fifth step")
 
 ## Frame
 

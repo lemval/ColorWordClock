@@ -8,6 +8,46 @@ This will be greatly appreciated via [Paypal](https://www.paypal.me/valkyer).
 
 The layout of the clock is Dutch! However, it will be pretty easy to create the clock in any language as long as it fits in text. Design your clockface first before proceeding.
 
+## The clock
+
+This is the first version I've build. It uses an aluminium U-frame to hold all layers together. Wood (milled) is easier to work with. It also still uses a DC power connector. Later models are equiped with a USB C connector.
+
+![First version](instructions/images/First%20version.JPG "The first clock")
+
+All configurations can be done via the website on the clock.
+
+### Faces
+
+1. Warm (text is warm white)
+1. Custom (text is a custom color)
+1. Rainbow (text uses a rainbow spectrum as seen in the picture above)
+1. Animate (same, but slowly shifting)
+1. ColorWord (each word another color)
+1. ColorChar (each character another color)
+
+The seconds can blink in a color of your own choice or can be switched off.
+
+### Transitions
+
+1. None (no transition)
+1. Random (each minute a random pick of transition)
+1. Animate (each minute a random FastLED pattern)
+1. Flow down (characters fall down...)
+1. Fade (text fades out and in)
+1. Swipe (remove and reappear by swipe from bottom to top and back)
+1. Scanner (same, but starting from right)
+1. Spiral (FastLED spiral)
+1. Fire (FastLED fire)
+1. Rings (FastLED rings)
+1. Wave (FastLED waves)
+1. Mill (FastLED rotating like a mill)
+
+You have the option to set the duration and animation speed.
+
+### Status bar
+
+The status bar is by default the date in binary. You have the option for some fixed patterns or use the 13 LEDs as status fields from Home Assistant. I tend to like having the date displayed.
+
 ## Hardware
 
 Besides some small stuff, you need the following as mentioned below. Costs will be between 50 and 100 euro on material.
@@ -26,7 +66,7 @@ You need 173 leds (13 x 13 + 4) on a 60D RGB strip, totaling to 3 meter. Use mod
 FastLED supports the SK6812 WWA version for warm/cold white. The upcoming release uses SK6812WWA (alias to SK6812Controller). See [FastLED/FastLED#2347](https://github.com/FastLED/FastLED/pull/2347). I currently have no knowledge if the software will run nicely using such strip.
 
 ### Power adapter
-A 5 volt power adapter (preferrably USB C but other connectors work) able to deliver 45 Watt.
+A 5 volt power adapter (preferrably USB C but other connectors work) able to deliver at least 30W (6A) but preferrably 45W (9A).
 
 ### Power connector
 
@@ -39,7 +79,7 @@ All layers should measure at least 30cm x 30cm square
 
 * Ground layer: 6 mm basewood (or alike)
 * LED layer: 2 mm MDF
-* Control layer: 6 mm MDF or basewood
+* Control layer: 6 mm MDF (or basewood)
 * Diffusion layer: A4 size tracing paper
 * Text layer: 0.5mm Lasersheet
 * Front layer: 3 mm Tinted grey transparent polycarbonate (or alike)
@@ -66,7 +106,7 @@ Once your clock is closed up (assembled) you can only update via OTA.
 
 * 04 Settings - select (connect other side to GND)
 * 05 Settings - next (connect other side to GND)
-* 06 Light sensor (3.3V - LDR  - SENSOR - 4K7 - GND)
+* 06 Light sensor (3.3V - LDR - SENSOR - 4K7 - GND)
 * 19 LED strip - clock
 * 20 LED strip - data
 
