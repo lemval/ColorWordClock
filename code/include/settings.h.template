@@ -7,6 +7,7 @@
 #define OTA_PASSWORD "MySecret"
 
 #define TEST_MODE false
+#define INVERTED false
 
 // Do not zero-prefix the DDMM values of birthdays!
 const int birthdays[2] = {101, 3112};
