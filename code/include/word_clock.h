@@ -14,6 +14,7 @@
 #include "led_array.h"
 #include "segments.h"
 #include "status_option.h"
+#include "tick_option.h"
 
 #define CLOCK_NAMESPACE "ColorClock"
 #define MIN_BRIGHTNESS 1
@@ -36,10 +37,10 @@ class WordClock {
     CRGB tickColor;
     FlowOption flow = FlowOption::None;
     FaceOption face = FaceOption::Warm;
+    TickOption tick = TickOption::Blink;
     StatusOption status = StatusOption::Date;
 
     int flowTime = 100;
-    bool showTick = true;
     bool lightSensorActive = true;
     bool visible = true;
     int8_t animation = -1;
@@ -47,7 +48,7 @@ class WordClock {
     int dimFactor = 100;
 
    private:
-    void updateTicks();
+    void updateTicks(int secondsPassed);
     void updateClockFace(long now = 0);
     void updateStatusBar(long now, boolean force);
     void fillTarget(LedArray* data, CRGB color);
@@ -83,7 +84,7 @@ class WordClock {
 
     CRGB getCustomColor() { return customColor; };
     CRGB getTickColor() { return tickColor; };
-    bool getTickState() { return showTick; }
+    int getTickOption() { return tick.getValue(); }
     int getFlowTime() { return flowTime; }
     int getFlowOption() { return flow.getValue(); }
     int getFaceOption() { return face.getValue(); }
@@ -93,6 +94,7 @@ class WordClock {
 
     void setNextFlow() { setFlowPattern(flow.next(), true); }
     void setNextFace() { setFacePattern(face.next(), true); }
+    void setNextTick() { setTickPattern(tick.next()); }
     int getAnimation() { return animation; }
     float getAnimationSpeed() { return animateSpeed; }
     void setAnimation(int value);
@@ -121,6 +123,11 @@ class WordClock {
         showFinal(FlowOption::None, FastLED.getBrightness(), force);
     };
 
+    void setTickPattern(int index) {
+        tick = TickOption(index);
+        persistentDataDirty = true;
+    };
+
     void setColor(int r, int g, int b) { setColor(CRGB(r, g, b)); }
     void setColor(CRGB color, bool force = false) {
         customColor = color;
@@ -135,11 +142,6 @@ class WordClock {
 
     void setTickColor(int r, int g, int b) {
         tickColor = CRGB(r, g, b);
-        persistentDataDirty = true;
-    }
-
-    void setTickVisible(boolean state) {
-        showTick = state;
         persistentDataDirty = true;
     }
 

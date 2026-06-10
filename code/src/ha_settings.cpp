@@ -14,6 +14,7 @@ HAMqtt haServer(wifiClient, haDevice, 30);
 HANumber flowTime("clock_duration");
 HASelect clockFlow("clock_flow");
 HASelect clockFace("clock_face");
+HASelect clockTick("clock_tick");
 HANumber faceType("clock_face_nr");
 HANumber faceSpeed("clock_face_sp", HABaseDeviceType::NumberPrecision::PrecisionP1);
 HALight clockColor("clock_color", HALight::Features::RGBFeature);
@@ -80,7 +81,7 @@ void onSwitchCommand(bool state, HALight* sender) {
     } else if (sender == &clockColor) {
         clockRef->setVisible(state);
     } else if (sender == &tickColor) {
-        clockRef->setTickVisible(state);
+        return;
     } else {
         int idx = getSenderIndex(sender);
         clockRef->activateStatusLed(idx, state);
@@ -110,6 +111,8 @@ void onSelectCommand(int8_t index, HASelect* sender) {
         clockRef->setFacePattern(index);
     else if (sender == &clockStatus)
         clockRef->setStatusPattern(index);
+    else if (sender == &clockTick)
+        clockRef->setTickPattern(index);
 
     sender->setState(index);
 }
@@ -202,6 +205,11 @@ void setupHomeAssist(WordClock* clock, ConfigServer* cfg) {
     clockFace.setIcon("mdi:car-shift-pattern");
     clockFace.setOptions(FaceOption::getAsString());
     clockFace.onCommand(onSelectCommand);
+
+    clockTick.setName("Tick");
+    clockTick.setIcon("mdi:car-shift-pattern");
+    clockTick.setOptions(TickOption::getAsString());
+    clockTick.onCommand(onSelectCommand);
 
     clockStatus.setName("Status");
     clockStatus.setIcon("mdi:car-shift-pattern");
@@ -300,13 +308,13 @@ void setupHomeAssist(WordClock* clock, ConfigServer* cfg) {
     }
 
     tickColor.setRGBColor(rgb(clock->getTickColor()), true);
-    tickColor.setState(clock->getTickState(), true);
 
     clockColor.setRGBColor(rgb(clock->getCustomColor()), true);
     clockColor.setState(1);
 
     clockFlow.setState(clock->getFlowOption(), true);
     clockFace.setState(clock->getFaceOption(), true);
+    clockTick.setState(clock->getTickOption(), true);
     clockStatus.setState(clock->getStatusOption(), true);
     flowTime.setState((int16_t)clock->getFlowTime(), true);
     ipAddress.setValue(wifiClient.localIP().toString().c_str());
@@ -315,11 +323,11 @@ void setupHomeAssist(WordClock* clock, ConfigServer* cfg) {
     loopMqtt();
 }
 
-void updateSettings(FlowOption flow, FaceOption face, bool tick, bool sensor, int16_t time) {
+void updateSettings(FlowOption flow, FaceOption face, TickOption tick, bool sensor, int16_t time) {
     if (active) {
         clockFlow.setState(flow.getValue());
         clockFace.setState(face.getValue());
-        tickColor.setState(tick);
+        clockTick.setState(tick.getValue());
         lightActive.setState(sensor);
         flowTime.setState(time, true);
     }

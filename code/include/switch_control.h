@@ -85,7 +85,7 @@ class SwitchControl {
             // Settings are set, now update
             updateSettings(FlowOption(clockRef->getFlowOption()),  //
                            FaceOption(clockRef->getFaceOption()),  //
-                           clockRef->getTickState(),               //
+                           clockRef->getTickOption(),              //
                            clockRef->getLightSensorState(),        //
                            clockRef->getFlowTime());
 
@@ -107,7 +107,22 @@ class SwitchControl {
     }
 
     void updateTickSensor() {
-        clockRef->markIndication(3, clockRef->getTickState() ? CRGB::White : CRGB::DarkBlue);  // _T_WAALF
+        CRGB color = CRGB::White;
+        switch (clockRef->getTickOption()) {
+            case TickOption::Off:
+                color = CRGB::Blue4;
+                break;
+            case TickOption::Solid:
+                color = CRGB::Yellow4;
+                break;
+            case TickOption::Blink:
+                color = CRGB::White;
+                break;
+            case TickOption::Fade:
+                color = CRGB::Green4;
+                break;
+        }
+        clockRef->markIndication(3, color);  // _T_WAALF
         FastLED.show();
     }
 
@@ -245,8 +260,9 @@ class SwitchControl {
                         shown = true;
                     }
                     if (digitalRead(PIN_SELECT) == LOW) {
+                        // TODO
                         clockRef->flashSignal(index, CRGB::Blue);
-                        clockRef->setTickVisible(!clockRef->getTickState());
+                        clockRef->setNextTick();
                         updateTickSensor();
                     }
                     break;

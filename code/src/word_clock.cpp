@@ -14,6 +14,7 @@
 #define KEY_FACE_COLOR "clck_fc"
 #define KEY_TICK_COLOR "clck_tc"
 #define KEY_TICK_SHOW "clck_tv"
+#define KEY_TICK "clck_tick"
 #define KEY_FLOW_TIME "clck_ft"
 #define KEY_FLOW "clck_flow"
 #define KEY_FACE "clck_face"
@@ -55,7 +56,7 @@ void WordClock::update(long now) {
             savePersistentData();
             updateStatusBar(now, true);  // Refresh every minute
         }
-        if (showTick) updateTicks();
+        updateTicks(now % 15);
     }
 
     // Serial.printf("%02d:%02d:%02d\n", hour(now), minute(now), second(now));
@@ -67,7 +68,7 @@ void WordClock::savePersistentData() {
     if (prefs.begin(CLOCK_NAMESPACE, false)) {
         prefs.putULong(KEY_FACE_COLOR, customColor.as_uint32_t());
         prefs.putULong(KEY_TICK_COLOR, tickColor.as_uint32_t());
-        prefs.putBool(KEY_TICK_SHOW, showTick);
+        prefs.putUShort(KEY_TICK, tick.getValue());
         prefs.putUInt(KEY_FLOW_TIME, flowTime);
         prefs.putUShort(KEY_FLOW, flow.getValue());
         prefs.putUShort(KEY_FACE, face.getValue());
@@ -81,13 +82,32 @@ void WordClock::savePersistentData() {
         Serial.println("Could not save: clock prefs not opened (write).");
 }
 
-void WordClock::updateTicks() {
+void WordClock::updateTicks(int secondsPassed) {
     int spot = segments.getBlinkSpot();
-    active.set(spot, tickColor);
-    FastLED.show();
-    delay(50);
-    active.set(spot, CRGB::Black);
-    FastLED.show();
+    for (size_t i = 0; i < dots.size; i++)
+        if (i != spot) active.set(dots.data[i], CRGB::Black);
+
+    switch (tick.getValue()) {
+        case TickOption::Blink:
+            active.set(spot, tickColor);
+            FastLED.show();
+            delay(50);
+            active.set(spot, CRGB::Black);
+            FastLED.show();
+            break;
+        case TickOption::Solid:
+            active.set(spot, tickColor);
+            FastLED.show();
+            break;
+        case TickOption::Fade:
+            active.set(spot, CRGB(tickColor).fadeToBlackBy(secondsPassed * 255 / 15));
+            FastLED.show();
+            break;
+        case TickOption::Off:
+            for (size_t i = 0; i < dots.size; i++) active.set(dots.data[i], CRGB::Black);
+            FastLED.show();
+            break;
+    }
 }
 
 void WordClock::updateStatusBar(long now, boolean force) {
@@ -140,10 +160,10 @@ void WordClock::initialize() {
     if (prefs.begin(CLOCK_NAMESPACE, true)) {
         customColor = CRGB(prefs.getULong(KEY_FACE_COLOR, customColor.as_uint32_t()));
         tickColor = CRGB(prefs.getULong(KEY_TICK_COLOR, tickColor.as_uint32_t()));
-        showTick = prefs.getBool(KEY_TICK_SHOW, true);
         flowTime = prefs.getUInt(KEY_FLOW_TIME, flowTime);
         flow = FlowOption(prefs.getUShort(KEY_FLOW, flow.getValue()));
         face = FaceOption(prefs.getUShort(KEY_FACE, face.getValue()));
+        tick = TickOption(prefs.getUShort(KEY_TICK, tick.getValue()));
         lightSensorActive = prefs.getBool(KEY_SENSOR, true);
         animateSpeed = (float)prefs.getInt(KEY_SPEED, 10) / 10.0;
         animation = prefs.getInt(KEY_ANIM, -1);

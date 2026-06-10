@@ -5,13 +5,13 @@
 #include "config_server.h"
 #include "word_clock.h"
 
-void setupHomeAssist(WordClock *clock, ConfigServer *cfg);
+void setupHomeAssist(WordClock* clock, ConfigServer* cfg);
 
 String getHomeAssistantStatus();
 
 void loopMqtt();
 void updateAnalog(int percentage);
 void updateIP(const char* address);
-void updateSettings(FlowOption flow, FaceOption face, bool tick, bool sensor, int16_t time);
+void updateSettings(FlowOption flow, FaceOption face, TickOption tick, bool sensor, int16_t time);
 
 #endif

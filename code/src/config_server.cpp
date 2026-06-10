@@ -72,7 +72,7 @@ void ConfigServer::onConfig() {
     clockRef->setAnimation(getArgument(CFG_PATTERN, -1));
     clockRef->setAnimationSpeed(getArgument(CFG_SPEED, 1.0f));
     clockRef->setFlowTime(getArgument(CFG_TIME, 1500));
-    clockRef->setTickVisible(getArgument(CFG_TICK, "off").equals("on"));
+    clockRef->setTickPattern(getArgument(CFG_TICK, clockRef->getTickOption()));
     clockRef->setLightSensorState(getArgument(CFG_LIGHT, "off").equals("on"));
     clockRef->setFlowPattern(getArgument(CFG_FLOW, clockRef->getFlowOption()));
     clockRef->setFacePattern(getArgument(CFG_FACE, clockRef->getFaceOption()));
@@ -123,7 +123,7 @@ String ConfigServer::getRootContent() {
            getParameterNumberContent(CFG_PATTERN, "Flow pattern", clockRef->getAnimation(), -1, 50, 1) +
 
            getParameterCheckContent(CFG_LIGHT, "Light sensor", clockRef->getLightSensorState()) +
-           getParameterCheckContent(CFG_TICK, "Seconds blinker", clockRef->getTickState()) +
+           getParameterSelectContent(CFG_TICK, "Seconds blinker", clockRef->getTickOption(), TickOption::getAsString()) +
 
            getParameterSelectContent(CFG_FLOW, "Minute transition", clockRef->getFlowOption(), FlowOption::getAsString()) +
            getParameterSelectContent(CFG_FACE, "Clock face", clockRef->getFaceOption(), FaceOption::getAsString()) +
