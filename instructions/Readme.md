@@ -74,4 +74,16 @@ The result is something like this:
 
 ## Frame
 
-...
+For this you can use a hardwood slat of about 28 by 9 millimeters. A groove is milled using a wood router. This groove should exactly match the thickness of the clock. 
+
+![Milled slat](images/milled.jpg "The sixth step")
+
+Use a miter saw or chop saw to make the frame pieces. Apply some slack as you can always make the pieces a little shorter. As my front plate was a little askew, I needed a couple of millimeters extra. Cut out holes for the power plug and the light sensor. Optionally, cut out holes for the switches. Measure and match the pieces and mark them if necessary.
+
+Paint in the color of your liking. Test the clock for a last time. Use wood glue to make the frame. Do not apply glue at the front side. Since the frame does not have to hold any weight, you should not glue the frame to the clock.
+
+Create a hanging hook or create a stand.
+
+<!-- ![Hanging hook](images/hook.jpg "The seventh step") -->
+
+Done!
