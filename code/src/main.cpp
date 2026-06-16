@@ -45,16 +45,21 @@ void setupOTA() {
 }
 
 void setup() {
+    wordClock.initialize();
+
     setupWifiConfiguredConnection();
+
+    wordClock.setStatusColor(10, 0, 0, 0);
 
     configServer.startServer();
 
     ntp.setUpdateInterval(50000 * 60 * 5);
     ntp.begin();
 
-    wordClock.initialize();
-
     setupHomeAssist(&wordClock, &configServer);
+
+    wordClock.setStatusColor(11, 0, 0, 0);
+
     control.setup(&wordClock);
 
     setupOTA();
@@ -63,6 +68,7 @@ void setup() {
     timerAttachInterrupt(timer, &timerTask);
     timerAlarm(timer, 1000 * 1000, true, 0);  // Each second an alarm
 
+    wordClock.setStatusColor(12, 0, 0, 0);
     Serial.println("Clock started!");
 }
 

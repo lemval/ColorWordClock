@@ -154,6 +154,12 @@ void WordClock::updateClockFace(long now) {
 
 void WordClock::initialize() {
     active.clear();
+
+    // Show at startup
+    setStatusColor(10, 200, 0, 0);
+    setStatusColor(11, 0, 0, 200);
+    setStatusColor(12, 0, 200, 0);
+
     FastLED.show();
 
     // Read settings from storage

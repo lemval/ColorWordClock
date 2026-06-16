@@ -64,12 +64,6 @@ class WordClock {
         customColor = CRGB(77, 126, 150);
         tickColor = CRGB::Wheat;
         for (size_t i = 0; i < SIGN_LEDS; i++) statusColors[i] = CRGB::AntiqueWhite;
-
-        // Show at startup
-        markIndication(10, CRGB::Red3);
-        markIndication(11, CRGB::Green3);
-        markIndication(12, CRGB::Blue3);
-        FastLED.show();
     };
 
     void initialize();
@@ -169,8 +163,10 @@ class WordClock {
         FastLED.show();
     }
 
+    /* Mark indication is used for the settings, not for the status bar */
     void markIndication(int index, CRGB color) { active.set(Segments::XY(index, 11), color); }
 
+    /* Status indication is used for the status bar, in the tick or custom color */
     void activateStatusLed(int index, boolean activate) {
         if (!visible) return;
         CRGB color = status.getColorFor(index, tickColor, customColor);
@@ -183,6 +179,7 @@ class WordClock {
         }
     }
 
+    /* Status indication is used for the status bar, in given color */
     void setStatusColor(int index, int r, int g, int b) {
         if (!visible) return;
         CRGB color = CRGB(r, g, b);
