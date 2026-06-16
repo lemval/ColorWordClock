@@ -138,6 +138,12 @@ Active = white, disabled = blue.
 
 Press NEXT, followed by SELECT. Lower left LED will turn green. Keep pressed and the LED will turn orange. When it turns red after 5 seconds, the clock and network will reset. You have to reconnect to the AP 'Clock' after that.
 
+### Startup
+
+At startup, at the right bottom, red, blue and green will show. As soon as the wifi is connected the red will disappear. As soon as Home Assistant integration and the configuation server is started, blue will switch off. If the clock as been fully initialized, green will follow.
+
+So, when all three colors keep on showing, either the wifi connection fails or the wifi connnection is not configured. The clock should then act as an access point named 'Clock'. Connect to the network and open a browser to the clock its IP address (likely: 192.168.4.1) and configure it.
+
 ## Attributes
 
 The following components or libraries are used:
