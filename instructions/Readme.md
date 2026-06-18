@@ -84,6 +84,12 @@ Paint in the color of your liking. Test the clock for a last time. Use wood glue
 
 Create a hanging hook or create a stand.
 
-<!-- ![Hanging hook](images/hook.jpg "The seventh step") -->
+![Hanging hook](images/clock_back.jpg "The seventh step")
 
 Done!
+
+![Ready and off](images/clock_off.jpg "Done 1")
+
+![Ready and on](images/clock_on.jpg "Done 2")
+
+<small>Note: The switched off characters are far more visible in the photograph than actually perceived.</small>
