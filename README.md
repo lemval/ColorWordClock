@@ -18,7 +18,6 @@ All configurations can be done via the website on the clock.
 
 [![Check the movie](instructions/images/ClockMovie.png)](instructions/images/ClockMovie.mp4)!
 
-
 ### Faces
 
 1. Warm (text is warm white)
@@ -28,7 +27,13 @@ All configurations can be done via the website on the clock.
 1. ColorWord (each word another color)
 1. ColorChar (each character another color)
 
-The seconds can blink in a color of your own choice or can be switched off.
+### Ticking
+
+The ticking is in a color of your own choice, lightning each corners per 15 seconds, with the following options:
+1. Switched off
+1. Blink each second
+1. Burning solid
+1. Fade from solid to off
 
 ### Transitions
 
@@ -160,3 +165,6 @@ The following components or libraries are used:
 * [LaserGRBL](https://lasergrbl.com/) for burning the layout
 * [Cliche](https://www.1001fonts.com/cliche-font.html) for the clock text
 
+## Releases
+
+* Jun 18, 2026 - Version 1.1.0 - Public release
