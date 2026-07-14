@@ -35,7 +35,9 @@ class LedArray {
     LedArray(LedArray* copy) { copyFrom(copy); }
 
     CRGB get(int pos) { return ledData[pos]; }
-    void set(int pos, CRGB color) { ledData[pos] = color; }
+    void set(int pos, CRGB color) {
+        if (pos >= 0) ledData[pos] = color;
+    }
 
     void clear() {
         for (int i = 0; i < NUM_LEDS; i++) ledData[i] = CRGB::Black;

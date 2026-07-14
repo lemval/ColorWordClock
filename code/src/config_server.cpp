@@ -4,6 +4,7 @@
 
 #include "HTTP_Method.h"
 #include "ha_settings.h"
+#include "settings.h"
 
 #define VALUE_HIDDEN "********* "
 
@@ -93,48 +94,49 @@ void ConfigServer::restart() {
 }
 
 String ConfigServer::getRootContent() {
-    String title = deviceName + " Config Server";
+    String title = deviceName + TXT_S_CONF_SERV;
     char start[20];
     sprintf(start, "%02d.%02d.%02d %02d:%02d", year(startTime), month(startTime), day(startTime), hour(startTime), minute(startTime));
     String connected = getHomeAssistantStatus();
     String result = "<!DOCTYPE html><html><head><title>" + title + "</title>" + getStyling() +  //
                     "</head><body><h1>" + title + "</h1>" +                                     //
-                    "<small><p>Built on: " + compile_date + "<br/>Running since: " + start + "<br/>MQTT connected: " + connected +
-                    "<br/></p></small>" + "<h2>Server settings</h2>";
+                    "<small><p>Built on: " + compile_date + "<br/>" + TXT_S_RUN_SINCE + ": " + start + "<br/>" + TXT_S_MQTT_CONN + ": " + connected +
+                    "<br/></p></small>" + "<h2>" + TXT_S_SETTINGS + "</h2>";
 
-    return result + "<form action=\"/\" method=\"POST\">" +                  //
-           getParameterContent(S_NAME, "Device name", deviceName, "text") +  //
-           getParameterContent(S_SERVER, "MQTT server", mqttServer, "text") +
-           getParameterContent(S_PORT, "MQTT port (default: 1883)", String(mqttPort), "number") +
-           getParameterContent(S_USER, "MQTT user (leave empty if none)", mqttUser, "text") +
-           getParameterContent(S_PASS, "MQTT password", VALUE_HIDDEN, "password") +
+    return result + "<form action=\"/\" method=\"POST\">" +                           //
+           getParameterContent(S_NAME, TXT_S_DEV_NAME, deviceName, "text") +          //
+           getParameterContent(S_SERVER, TXT_S_MQTT_SRV, mqttServer, "text") +        //
+           getParameterContent(S_PORT, TXT_S_MQTT_PRT, String(mqttPort), "number") +  //
+           getParameterContent(S_USER, TXT_S_MQTT_USR, mqttUser, "text") +            //
+           getParameterContent(S_PASS, TXT_S_MQTT_PWD, VALUE_HIDDEN, "password") +
 
            "<div><input type=\"submit\" value=\"Save!\" onClick=\"this.disabled=true; this.value='Saving...'; this.form.submit();\" "
            "/></div>" +
 
-           "</form><form action=\"/restart\" method=\"POST\">" +  //
-           "<div><input style=\"background: #f89c9c; position:inherit;\" type=\"submit\" value=\"Reboot\" onClick "
-           "=\"this.disabled=true; this.value='Rebooting...'; this.form.submit();\" /></div>" +
-           "</form><p>Save first, then reboot!</p>" + "<h2>Clock settings</h2>" +  //
+           "</form><form action=\"/restart\" method=\"POST\">" +                                                       //
+           "<div><input style=\"background: #f89c9c; position:inherit;\" type=\"submit\" value=\"" + TXT_S_REBOOT +    //
+           "\" onClick =\"this.disabled=true; this.value='" + TXT_S_REBOOTING + "'; this.form.submit();\" /></div>" +  //
+           "</form><p>" + TXT_S_SAVEFIRST + "</p>" + "<h2>" + TXT_S_CLOCK_SET + "</h2>" +                              //
            "<form action=\"/settings\" method=\"POST\">" +
 
-           getParameterNumberContent(CFG_TIME, "Flow time", clockRef->getFlowTime(), 0, 5000, 100) +
-           getParameterNumberContent(CFG_SPEED, "Flow speed", clockRef->getAnimationSpeed(), 0.1f, 2.5f, 0.1f) +
-           getParameterNumberContent(CFG_PATTERN, "Flow pattern", clockRef->getAnimation(), -1, 50, 1) +
+           getParameterNumberContent(CFG_TIME, TXT_SSET_TIME, clockRef->getFlowTime(), 0, 5000, 100) +
+           getParameterNumberContent(CFG_SPEED, TXT_SSET_SPEED, clockRef->getAnimationSpeed(), 0.1f, 2.5f, 0.1f) +
+           getParameterNumberContent(CFG_PATTERN, TXT_SSET_PATTERN, clockRef->getAnimation(), -1, 50, 1) +
 
-           getParameterCheckContent(CFG_LIGHT, "Light sensor", clockRef->getLightSensorState()) +
-           getParameterSelectContent(CFG_TICK, "Seconds blinker", clockRef->getTickOption(), TickOption::getAsString()) +
+           getParameterCheckContent(CFG_LIGHT, TXT_SSET_LIGHT, clockRef->getLightSensorState()) +
+           getParameterSelectContent(CFG_TICK, TXT_SSET_TICK, clockRef->getTickOption(), TickOption::getAsString()) +
 
-           getParameterSelectContent(CFG_FLOW, "Minute transition", clockRef->getFlowOption(), FlowOption::getAsString()) +
-           getParameterSelectContent(CFG_FACE, "Clock face", clockRef->getFaceOption(), FaceOption::getAsString()) +
-           getParameterSelectContent(CFG_STAT, "Status field", clockRef->getStatusOption(), StatusOption::getAsString()) +
+           getParameterSelectContent(CFG_FLOW, TXT_SSET_FLOW, clockRef->getFlowOption(), FlowOption::getAsString()) +
+           getParameterSelectContent(CFG_FACE, TXT_SSET_FACE, clockRef->getFaceOption(), FaceOption::getAsString()) +
+           getParameterSelectContent(CFG_STAT, TXT_SSET_STAT, clockRef->getStatusOption(), StatusOption::getAsString()) +
 
-           getParameterColorContent(CFG_COLOR, "Custom clock color", clockRef->getCustomColor()) +
-           getParameterColorContent(CFG_TKCLR, "Seconds color", clockRef->getTickColor()) +
+           getParameterColorContent(CFG_COLOR, TXT_SSET_COLOR, clockRef->getCustomColor()) +
+           getParameterColorContent(CFG_TKCLR, TXT_SSET_TKCLR, clockRef->getTickColor()) +
 
-           getParameterNumberContent(CFG_DIM, "Brightness correction", clockRef->getDimFactor(), 0, 100, 1) +
+           getParameterNumberContent(CFG_DIM, TXT_SSET_DIM, clockRef->getDimFactor(), 0, 100, 1) +
 
-           "<div><input type=\"submit\" value=\"Configure!\" onClick=\"this.disabled=true; this.value='Updating...'; this.form.submit();\"/> "
+           "<div><input type=\"submit\" value=\"" + TXT_S_DO_CONFIG + "\" onClick=\"this.disabled=true; this.value='" + TXT_S_UPDATING +
+           "'; this.form.submit();\"/> "
            "</div> " +
 
            "</body></html>";
@@ -221,8 +223,7 @@ String ConfigServer::getParameterSelectContent(const char* key, const char* name
     }
 
     return "<div class=\"form-item\"><label for=\"" + element + "\">" + name + ":</label>" +  //
-           "<select name=\"" + element + "\" id=\"" + element + "\">" +                       //
-           result +                                                                           //
+           "<select name=\"" + element + "\" id=\"" + element + "\">" + result +              //
            "</select></div>";
 }
 

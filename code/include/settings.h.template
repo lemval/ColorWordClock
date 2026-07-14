@@ -1,23 +1,134 @@
 #ifndef SETTINGS_h
 #define SETTINGS_h
 
-#include <Timezone.h>
-
 // Define your personal OTA password
+
 #define OTA_PASSWORD "MySecret"
 
 #define TEST_MODE false
+
+// When accidentally the light sensor is welded in reverse
+
 #define INVERTED false
 
+// Be surprised on your birthday.
 // Do not zero-prefix the DDMM values of birthdays!
+
 const int birthdays[2] = {101, 3112};
 
-// Set the language for the birthday transition: 0 = EN, 1 = NL
-const int language = 0;
+// Set the language for the clock and for the birthday transition
+
+// #define NL_BIRTHDAY
+// #define NL_CLOCK_FACE
+// #define EN_BIRTHDAY
+// #define EN_CLOCK_FACE
 
 // Configure your timezone here. Currently: Europe/Amsterdam
 // HOWTO at https://github.com/JChristensen/Timezone
-inline TimeChangeRule getStandard() { return {"CET", Last, Sun, Oct, 2, 60}; }
+
+#include <Timezone.h>
+
+inline TimeChangeRule getStandard()       { return {"CET",  Last, Sun, Oct, 2, 60}; }
 inline TimeChangeRule getDaylightSaving() { return {"CEST", Last, Sun, Mar, 2, 120}; }
+
+#endif
+
+// Internationalization (sort of)
+
+#ifdef EN_CLOCK_FACE
+
+// English settings
+
+#define TXT_LIGHT_SENSOR "Light Intensity"
+#define TXT_STAT_OPTIONS "Default;Individual;Tick;Clock;No Alert;Mild Alert;High Alert;----"
+#define TXT_TICK_OPTIONS "Off;Blink;Solid;Fade"
+#define TXT_FACE_OPTIONS "Warm;Custom;Rainbow;Animate;ColorWord;ColorChar"
+#define TXT_FLOW_OPTIONS "None;Random;Animate;Flow down;Fade;Swipe;Scanner;Spiral;Fire;Rings;Wave;Mill"
+
+#define TXT_S_CONF_SERV " Config Server"
+#define TXT_S_RUN_SINCE "Running since"
+#define TXT_S_MQTT_CONN "MQTT connected"
+#define TXT_S_DEV_NAME "Device name"
+#define TXT_S_SETTINGS "Server settings"
+#define TXT_S_MQTT_SRV "MQTT server"
+#define TXT_S_MQTT_PRT "MQTT port (default: 1883)"
+#define TXT_S_MQTT_USR "MQTT user (leave empty if none)"
+#define TXT_S_MQTT_PWD "MQTT password"
+#define TXT_S_REBOOT "Restart"
+#define TXT_S_REBOOTING "Restarting..."
+#define TXT_S_SAVEFIRST "Save first, then restart!"
+#define TXT_S_CLOCK_SET "Clock settings"
+#define TXT_S_DO_CONFIG "Configure!"
+#define TXT_S_UPDATING "Updating..."
+
+#define TXT_SSET_TIME "Flow time"
+#define TXT_SSET_SPEED "Flow speed"
+#define TXT_SSET_PATTERN "Flow pattern"
+#define TXT_SSET_LIGHT "Light sensor"
+#define TXT_SSET_TICK "Seconds blinker"
+#define TXT_SSET_FLOW "Minute transition"
+#define TXT_SSET_FACE "Clock face"
+#define TXT_SSET_STAT "Status field"
+#define TXT_SSET_COLOR "Custom clock color"
+#define TXT_SSET_TKCLR "Seconds color"
+#define TXT_SSET_DIM "Brightness correction"
+#define TXT_SSET_SECONDS "Seconds"
+
+#define TXT_S_UNKNOWN "unknown"
+#define TXT_S_NO "No"
+#define TXT_S_ONLINE "Yes, and online"
+#define TXT_S_OFFLINE "Yes, but offline"
+#define TXT_S_STATUS_TMPL "Status ?"
+#define TXT_S_INTERNAL_LED "Internal LED"
+#define TXT_S_ADDR "IP Address"
+
+#endif
+
+#ifdef NL_CLOCK_FACE
+
+// Dutch settings
+
+#define TXT_LIGHT_SENSOR "Lichtintensiteit"
+#define TXT_STAT_OPTIONS "Standaard;Individueel;Minuut;Klok;Laag;Midden;Hoog;Datum"
+#define TXT_TICK_OPTIONS "Uit;Knipper;Vast;Vervaging"
+#define TXT_FACE_OPTIONS "Warm;Keuze;Regenboog;Animatie;Woordkleur;Letterkleur"
+#define TXT_FLOW_OPTIONS "Geen;Willekeurig;Animatie;Vallend;Vervagend;Zwiep;Veeg;Spiraal;Vuur;Ringen;Golven;Molen"
+
+#define TXT_S_CONF_SERV " Configuratieserver"
+#define TXT_S_RUN_SINCE "Draaiend sinds"
+#define TXT_S_MQTT_CONN "MQTT verbonden"
+#define TXT_S_DEV_NAME "Apparaatnaam"
+#define TXT_S_SETTINGS "Server-instellingen"
+#define TXT_S_MQTT_SRV "MQTT server"
+#define TXT_S_MQTT_PRT "MQTT poort (std: 1883)"
+#define TXT_S_MQTT_USR "MQTT user (indien geen: leeg)"
+#define TXT_S_MQTT_PWD "MQTT wachtwoord"
+#define TXT_S_REBOOT "Herstart"
+#define TXT_S_REBOOTING "Herstaten..."
+#define TXT_S_SAVEFIRST "Eerst opslaan, daarna herstarten!"
+#define TXT_S_CLOCK_SET "Klokinstellingen"
+
+#define TXT_SSET_COLOR "Kleur kloklicht"
+#define TXT_SSET_TICK "Hoeklicht"
+#define TXT_SSET_FLOW "Overgang"
+#define TXT_SSET_FACE "Klokbeeld"
+#define TXT_SSET_STAT "Statusveld"
+#define TXT_SSET_TIME "Overgangstijd"
+#define TXT_SSET_SPEED "Overgangssnelheid"
+#define TXT_SSET_PATTERN "Overgangspatroon"
+#define TXT_SSET_LIGHT "lichtsensor"
+#define TXT_SSET_DIM "Lichtcorrectie"
+#define TXT_SSET_TKCLR "Kleur hoeklicht"
+#define TXT_SSET_SECONDS "Secondes"
+
+#define TXT_S_DO_CONFIG "Voer door!"
+#define TXT_S_UPDATING "Bijwerken..."
+#define TXT_S_UNKNOWN "onbekend"
+#define TXT_S_NO "Nee"
+#define TXT_S_ONLINE "Ja, en online"
+#define TXT_S_OFFLINE "Ja, maar offline"
+#define TXT_S_STATUS_TMPL "Status ?"
+#define TXT_S_INTERNAL_LED "Interne LED"
+#define TXT_S_ADDR "IP-adres"
 
 #endif

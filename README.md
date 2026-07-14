@@ -1,16 +1,16 @@
-# Dutch Color clock
+# Color clock
 
 Hi,
 
 This is a personal project with lots of effort to get it up and running.
-If you have build a clock, please give a little credit to this project. 
+If you have built a clock, please give a little credit to this project. 
 This will be greatly appreciated via [Paypal](https://www.paypal.me/valkyer).
 
-The layout of the clock is Dutch! However, it will be pretty easy to create the clock in any language as long as it fits in text. Design your clockface first before proceeding.
+The layout of the clock is extensively tested in Dutch but also supports the English language. It will be relatively easy to create the clock in any other language as long as it fits the 13x13 layout. Design your clock face first before proceeding.
 
 ## The clock
 
-This is the first version I've build. It uses an aluminium U-frame to hold all layers together. Wood (milled) is easier to work with. It also still uses a DC power connector. Later models are equiped with a USB C connector.
+This is the first version I've built. It uses an aluminum U-frame to hold all layers together. Wood (milled) is easier to work with. It also still uses a DC power connector. Later models are equipped with a USB-C connector.
 
 ![First version](instructions/images/First%20version.JPG "The first clock")
 
@@ -29,7 +29,7 @@ All configurations can be done via the website on the clock.
 
 ### Ticking
 
-The ticking is in a color of your own choice, lightning each corners per 15 seconds, with the following options:
+The ticking is in a color of your own choice, lighting each corner per 15 seconds, with the following options:
 1. Switched off
 1. Blink each second
 1. Burning solid
@@ -43,7 +43,7 @@ The ticking is in a color of your own choice, lightning each corners per 15 seco
 1. Flow down (characters fall down...)
 1. Fade (text fades out and in)
 1. Swipe (remove and reappear by swipe from bottom to top and back)
-1. Scanner (same, but starting from right)
+1. Scanner (same, but starting from the right)
 1. Spiral (FastLED spiral)
 1. Fire (FastLED fire)
 1. Rings (FastLED rings)
@@ -54,11 +54,11 @@ You have the option to set the duration and animation speed.
 
 ### Status bar
 
-The status bar is by default the date in binary. You have the option for some fixed patterns or use the 13 LEDs as status fields from Home Assistant. I tend to like having the date displayed.
+The status bar is by default the date in binary (Dutch) or empty (English). You have the option for some fixed patterns or to use the 13 (or 6 for English) LEDs as status fields from Home Assistant. I tend to like having the date displayed. Note that for English, there is no room for showing the date as that space is consumed.
 
 ## Hardware
 
-Besides some small stuff, you need the following as mentioned below. Costs will be between 50 and 100 euro on material.
+Besides some small stuff, you need the following as mentioned below. Costs will be between 50 and 100 euros on material.
 
 Instructions for building the clock are found in the [instruction folder](instructions/Readme.md).
 
@@ -66,19 +66,21 @@ Instructions for building the clock are found in the [instruction folder](instru
 
 The clock can fit a model esp32-c6 devkit, which is easy to use and to connect, although the devkit is larger in size.
  
-You need at least a 4MB card, however it has only be tested on a 8MB and 16MB card. If you skip OTA capability (you then have to disassemble the clock to update!) you can use a 2MB card.
+You need at least a 4MB card; however, it has only been tested on an 8MB and 16MB card. If you skip OTA capability (you then have to disassemble the clock to update!), you can use a 2MB card.
 
 ### Light sensor
 
 Use a model 5516 in combination with a 4K7 resistor.
 
 ### LED strip
-You need 173 leds (13 x 13 + 4) on a 60D RGB strip, totaling to 3 meter. Use model HD107HD/APA107 (60 leds per meter) or alike, but make sure you can cut each LED individually. Using another model means also changing led_array.h (at FastLED.addLeds).
 
-FastLED supports the SK6812 WWA version for warm/cold white. The upcoming release uses SK6812WWA (alias to SK6812Controller). See [FastLED/FastLED#2347](https://github.com/FastLED/FastLED/pull/2347). I currently have no knowledge if the software will run nicely using such strip.
+You need 173 LEDs (13 x 13 + 4) on a 60D RGB strip, totaling 3 meter. Use model HD107HD/APA107 (60 LEDs per meter) or alike, but make sure you can cut each LED individually. Using another model also means changing led_array.h (at FastLED.addLeds).
+
+FastLED supports the SK6812 WWA version for warm/cold white. The upcoming release of FastLED uses SK6812WWA (alias to SK6812Controller). See [FastLED/FastLED#2347](https://github.com/FastLED/FastLED/pull/2347). I currently have no knowledge if the software will run nicely using such a strip.
 
 ### Power adapter
-A 5 volt power adapter (preferrably USB C but other connectors work) able to deliver at least 30W (6A) but preferrably 45W (9A).
+
+A 5 volt power adapter (preferably USB-C but other connectors work) able to deliver at least 30W (6A) but preferably 45W (9A).
 
 ### Power connector
 
@@ -102,17 +104,17 @@ Be careful to not glue the front and text layer. It will show.
 
 ## Software
 
-Create a `settings.h` based on `settings.h.template`. You can show a 'happy birthday' on given dates as transition.
+Create a `settings.h` based on `settings.h.template`. Configure your language, timezone, and OTA password. You can also show a 'happy birthday' on given dates as a transition. The language can be set for the CLOCK_FACE and BIRTHDAY by activating the corresponding `#define`.
 
-Create a `platformio-local.ini` in the same manner. This allows for using your own password for OTA updates.
+Create a `platformio-local.ini` in the same manner. This allows for using uploading new releases via OTA updates.
 
-Change to your board size in `platformio.ini` by using one of the preconfigured board size config files (set to 16MB standard).
+Change to your board size in `platformio.ini` by using one of the preconfigured board size config files (set in `extra_configs` to 16MB standard).
 
-Compile, run and upload using Visual Studio Code with PlatformIO as plugin.
+Compile, run, and upload using Visual Studio Code with PlatformIO as a plugin.
 
-When started, connect to Wifi network 'Clock' and navigate to 192.168.4.1 to configure the Clock for first use. After that, reconnect to a regular Wifi network and open the browser on the assigned IP address.
+When started, connect to the Wifi network 'Clock' and navigate to 192.168.4.1 to configure the Clock for first use. After that, reconnect to a regular Wifi network and open the browser on the assigned IP address.
 
-Once your clock is closed up (assembled) you can only update via OTA.
+Once your clock is closed up (assembled), you can only update via OTA.
 
 ## Pin layout
 
@@ -124,7 +126,7 @@ Once your clock is closed up (assembled) you can only update via OTA.
 
 ## Control
 
-The settings buttons will allow you to configure the clock on a basic level. To configure on a finer level, just open the browser to the clock (not very reactive, since the clock is working on showing you the time and transitions) or use the Home Assistant integration (just configure MQTT via the browser, run a MQTT server and let Home Assistant read from that server).
+The settings buttons will allow you to configure the clock on a basic level. To configure on a finer level, just open the browser to the clock (not very reactive, since the clock is working on showing you the time and transitions) or use the Home Assistant integration (just configure MQTT via the browser, run an MQTT server, and let Home Assistant read from that server).
 
 ### Configuration
 
@@ -141,13 +143,13 @@ Active = white, disabled = blue.
 
 ### Reset
 
-Press NEXT, followed by SELECT. Lower left LED will turn green. Keep pressed and the LED will turn orange. When it turns red after 5 seconds, the clock and network will reset. You have to reconnect to the AP 'Clock' after that.
+Press NEXT, followed by SELECT. The lower left LED will turn green. Keep pressed, and the LED will turn orange. When it turns red after 5 seconds, the clock and network will reset. You have to reconnect to the Wifi Access Point 'Clock' after that.
 
 ### Startup
 
-At startup, at the right bottom, red, blue and green will show. As soon as the wifi is connected the red will disappear. As soon as Home Assistant integration and the configuation server is started, blue will switch off. If the clock as been fully initialized, green will follow.
+At startup, at the bottom right, red, blue, and green will show. As soon as the Wifi is connected, the red will disappear. As soon as Home Assistant integration and the configuration server is started, blue will switch off. If the clock has been fully initialized, green will follow.
 
-So, when all three colors keep on showing, either the wifi connection fails or the wifi connnection is not configured. The clock should then act as an access point named 'Clock'. Connect to the network and open a browser to the clock its IP address (likely: 192.168.4.1) and configure it.
+So, when all three colors keep on showing, either the Wifi connection fails or the Wifi connection is not configured. The clock should then act as an access point named 'Clock'. Connect to the network and open a browser to the clock's IP address (likely: 192.168.4.1) and configure it.
 
 ## Attributes
 
@@ -168,3 +170,4 @@ The following components or libraries are used:
 ## Releases
 
 * Jun 18, 2026 - Version 1.1.0 - Public release
+* Jul 19, 2026 - Version 1.2.0 - English face added

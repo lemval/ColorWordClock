@@ -5,6 +5,7 @@
 
 #include "board_led.h"
 #include "config_server.h"
+#include "settings.h"
 
 boolean active = false;
 WiFiClient wifiClient;
@@ -45,8 +46,8 @@ HASelect clockStatus("clock_status");
 BoardLed haLed = BoardLed();
 WordClock* clockRef = NULL;
 
-const char* baseName = "Status ?";
-const char* ipAddressValue = "unknown";
+const char* baseName = TXT_S_STATUS_TMPL;
+const char* ipAddressValue = TXT_S_UNKNOWN;
 char nameArray[13][10];
 
 void loopMqtt() {
@@ -57,8 +58,11 @@ void loopMqtt() {
 }
 
 String getHomeAssistantStatus() {
-    String avail = haDevice.isAvailable() ? "Yes, and online" : "Yes, but offline";
-    return haServer.isConnected() ? avail : "<span style=\"color:Crimson; font-weight:bold\">No</span>";
+    String avail = haDevice.isAvailable() ? TXT_S_ONLINE : TXT_S_OFFLINE;
+    String fail = "<span style=\"color:Crimson; font-weight:bold\">";
+    fail += TXT_S_NO;
+    fail += "</span>";
+    return haServer.isConnected() ? avail : fail;
 }
 
 int getSenderIndex(HALight* sender) {
@@ -173,7 +177,7 @@ void setupHomeAssist(WordClock* clock, ConfigServer* cfg) {
 
     haDevice.setUniqueId(mac, sizeof(mac));
     haDevice.setName(cfg->getDeviceName());
-    haDevice.setSoftwareVersion("1.1.0");
+    haDevice.setSoftwareVersion("1.2.0");
     haDevice.setManufacturer("Lemval Systems");
     haDevice.enableExtendedUniqueIds();
     haDevice.enableSharedAvailability();
@@ -181,42 +185,42 @@ void setupHomeAssist(WordClock* clock, ConfigServer* cfg) {
 
     clockRef = clock;
 
-    internalLed.setName("Internal LED");
+    internalLed.setName(TXT_S_INTERNAL_LED);
     internalLed.setIcon("mdi:lightbulb");
     internalLed.onStateCommand(onSwitchCommand);
     internalLed.onRGBColorCommand(onColorCommand);
 
-    clockColor.setName("Color");
+    clockColor.setName(TXT_SSET_COLOR);
     clockColor.setIcon("mdi:lightbulb");
     clockColor.onStateCommand(onSwitchCommand);
     clockColor.onRGBColorCommand(onColorCommand);
 
-    tickColor.setName("Seconds");
+    tickColor.setName(TXT_SSET_SECONDS);
     tickColor.setIcon("mdi:lightbulb");
     tickColor.onStateCommand(onSwitchCommand);
     tickColor.onRGBColorCommand(onColorCommand);
 
-    clockFlow.setName("Flow");
+    clockFlow.setName(TXT_SSET_FLOW);
     clockFlow.setIcon("mdi:car-shift-pattern");
     clockFlow.setOptions(FlowOption::getAsString());
     clockFlow.onCommand(onSelectCommand);
 
-    clockFace.setName("Face");
+    clockFace.setName(TXT_SSET_FACE);
     clockFace.setIcon("mdi:car-shift-pattern");
     clockFace.setOptions(FaceOption::getAsString());
     clockFace.onCommand(onSelectCommand);
 
-    clockTick.setName("Tick");
+    clockTick.setName(TXT_SSET_TICK);
     clockTick.setIcon("mdi:car-shift-pattern");
     clockTick.setOptions(TickOption::getAsString());
     clockTick.onCommand(onSelectCommand);
 
-    clockStatus.setName("Status");
+    clockStatus.setName(TXT_SSET_STAT);
     clockStatus.setIcon("mdi:car-shift-pattern");
     clockStatus.setOptions(StatusOption::getAsString());
     clockStatus.onCommand(onSelectCommand);
 
-    flowTime.setName("Slide time");
+    flowTime.setName(TXT_SSET_TIME);
     flowTime.setIcon("mdi:timer-check-outline");
     flowTime.setMin(0);
     flowTime.setMax(5000);
@@ -225,7 +229,7 @@ void setupHomeAssist(WordClock* clock, ConfigServer* cfg) {
     flowTime.setUnitOfMeasurement("ms");
     flowTime.onCommand(onSetTransitionTimeCommand);
 
-    faceType.setName("Animation");
+    faceType.setName(TXT_SSET_PATTERN);
     faceType.setMin(-1);
     faceType.setMax(50);
     faceType.setStep(1.0);
@@ -233,7 +237,7 @@ void setupHomeAssist(WordClock* clock, ConfigServer* cfg) {
     faceType.onCommand(onSetValue);
     faceType.setCurrentState(-1.0f);
 
-    faceSpeed.setName("Animation Speed");
+    faceSpeed.setName(TXT_SSET_SPEED);
     faceSpeed.setMin(0.1);
     faceSpeed.setMax(2.5);
     faceSpeed.setStep(0.1);
@@ -241,14 +245,14 @@ void setupHomeAssist(WordClock* clock, ConfigServer* cfg) {
     faceSpeed.onCommand(onSetValue);
     faceSpeed.setCurrentState(0.9f);
 
-    lightIntensity.setName("Light Level");
+    lightIntensity.setName(TXT_SSET_DIM);
     lightIntensity.setIcon("mdi:brightness-4");
 
-    lightActive.setName("Light sensor");
+    lightActive.setName(TXT_SSET_LIGHT);
     lightActive.onCommand(onSwitchCommand);
     lightActive.setIcon("mdi:brightness-4");
 
-    ipAddress.setName("IP Address");
+    ipAddress.setName(TXT_S_ADDR);
     ipAddress.setIcon("mdi:lan");
     int i = 0;
 

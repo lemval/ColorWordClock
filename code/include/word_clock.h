@@ -141,6 +141,8 @@ class WordClock {
 
     void flashSignal(int stateLed, CRGB color) {
         int spot = segments.getSignSpot(stateLed);
+        if (spot == -1) return;
+
         CRGB current = active.get(spot);
         active.set(spot, CRGB::Black);
         FastLED.show();

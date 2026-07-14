@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 
+#include "settings.h"
+
 class FlowOption {
     int pick;
     int randomValue;
@@ -29,7 +31,7 @@ class FlowOption {
 
     int next() { return (pick + 1) % SIZE; }
 
-    static const char* getAsString() { return "None;Random;Animate;Flow down;Fade;Swipe;Scanner;Spiral;Fire;Rings;Wave;Mill"; }
+    static const char* getAsString() { return TXT_FLOW_OPTIONS; }
 
     // Special, not selectable
     static const int BirthDay = -1;

@@ -1,6 +1,8 @@
 #ifndef TICK_OPTION_h
 #define TICK_OPTION_h
 
+#include "settings.h"
+
 class TickOption {
     int pick;
 
@@ -15,7 +17,7 @@ class TickOption {
     int getValue() { return pick; }
     int next() { return (pick + 1) % SIZE; }
 
-    static const char* getAsString() { return "Off;Blink;Solid;Fade"; }
+    static const char* getAsString() { return TXT_TICK_OPTIONS; }
     static const int Off = 0;
     static const int Blink = 1;
     static const int Solid = 2;

@@ -1,6 +1,8 @@
 #ifndef FACE_OPTION_h
 #define FACE_OPTION_h
 
+#include "settings.h"
+
 class FaceOption {
     int pick;
 
@@ -15,7 +17,7 @@ class FaceOption {
     int getValue() { return pick; }
     int next() { return (pick + 1) % SIZE; }
 
-    static const char* getAsString() { return "Warm;Custom;Rainbow;Animate;ColorWord;ColorChar"; }
+    static const char* getAsString() { return TXT_FACE_OPTIONS; }
     static const int Warm = 0;
     static const int Custom = 1;
     static const int Rainbow = 2;

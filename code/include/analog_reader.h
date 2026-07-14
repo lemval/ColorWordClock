@@ -34,7 +34,7 @@ class AnalogReader {
     // TODO Make sure to give the correct value to 'inverted'
 
     // Only use ADC1 (ADC2 is used for WiFi)
-    Sensor sensors[NUM_SENSORS] = {Sensor("Light Intensity", PIN_SENSOR, INVERTED)};
+    Sensor sensors[NUM_SENSORS] = {Sensor(TXT_LIGHT_SENSOR, PIN_SENSOR, INVERTED)};
 
    public:
     int lowestValue;

@@ -4,31 +4,31 @@ Instructions to build the clock.
 
 ## Groundwork
 
-Start out with a square [ground layer](../design/ClockLayers%20v2%20layer1%20base6%202x300x100.svg), optionally with holes for small bolts to join the layers. Optionally burn the [guide lines](../design/ClockLayers%20v2%20layer1a%20base6%201x3000x20.svg) on this ground layer to correctly position the LEDs. Glue the [led layer](../design/ClockLayers%20v2%20layer2%20mdf2%201x400x100.svg) atop of it and make sure the lanes are straigh. You can use the cut out part for this, but make sure this part is not glued to the ground layer.
+Start out with a square [ground layer](../design/ClockLayers%20v2%20layer1%20base6%202x300x100.svg), optionally with holes for small bolts to join the layers. Optionally burn the [guide lines](../design/ClockLayers%20v2%20layer1a%20base6%201x3000x20.svg) on this ground layer to correctly position the LEDs. Glue the [LED layer](../design/ClockLayers%20v2%20layer2%20mdf2%201x400x100.svg) atop it and make sure the lanes are straight. You can use the cut-out part for this, but make sure this part is not glued to the ground layer.
 
 The result is something like this:
 ![Ground and LED layer with LED strip](images/Start.jpg "The first step")
 
 ## Add LEDs
 
-Cut the first section of the strip to form a row (13 LEDs). Always start in the upperleft corner with 'DI' or 'Data In' because that is where the controller will be connected. Remove the protective foil so that the adhesive strip can be used to put it in place. Use the center line to position the center LED. Sometimes the welded part enlarges the distance between LEDs. Either correct the welding or accept a little displacement.
+Cut the first section of the strip to form a row (13 LEDs). Always start in the upper left corner with 'DI' or 'Data In' because that is where the controller will be connected. Remove the protective foil so that the adhesive strip can be used to put it in place. Use the center line to position the center LED. Sometimes the welded part enlarges the distance between LEDs. Either correct the welding or accept a little displacement.
 
 The second section or row will be upside down, because you end with 'data out' which should be connected on the same side to 'data in'.
 
-This hence and forth positioning is called 'serpentine'.
+This henceforth positioning is called 'serpentine'.
 
-Position the last four LEDs in the corners while taking the direction of the data line into account. The order is: bottom right, bottom left, top left, top right.
+Position the last four LEDs in the corners while taking the direction of the data line into account. The order is: bottom right, bottom left, top left, and top right.
 
 The result is something like this:
 ![Ground and LED layer with LED strip](images/Leds%20added.jpg "The second step")
 
 ## Wiring and cutting
 
-Cut open the lane on the left side. This allows the wiring for the corner LEDs. Use preferrably different colors for power, ground, data and clock. Solder the corner LEDs like the image below. On the bottom side of the clock you need extra length for power and ground to weld the power connector in place. On the top side make sure the wires need to be placed at the side of the open space, otherwise the ESP won't fit. Glue down these wires to the wood.
+Cut open the lane on the left side. This allows the wiring for the corner LEDs. Use preferably different colors for power, ground, data, and clock. Solder the corner LEDs like the image below. On the bottom side of the clock, you need extra length for power and ground to weld the power connector in place. On the top side, make sure the wires are placed at the side of the open space; otherwise, the ESP won't fit. Glue down these wires to the wood.
 
-Next wire the LED strips ground to ground, power to power, clock out to clock in, data out to data in.
+Next, wire the LED strips ground to ground, power to power, clock out to clock in, and data out to data in.
 
-For the ESP I used bended pin headers (male) and wires with pin headers (female). You can optionally directly solder the wires to the ESP. Cut the wires in the right length and attach the LED strips. Do not yet attach the light sensor and switches.
+For the ESP, I used bended pin headers (male) and wires with pin headers (female). You can optionally directly solder the wires to the ESP. Cut the wires to the right length and attach the LED strips. Do not yet attach the light sensor and switches.
 
 The result is something like this:
 ![Wired result](images/Soldering.jpg "The third step")
@@ -43,44 +43,44 @@ Place a header (C) of 6 on 5V/GND/9/18/19/20.
 
 Connect a red wire to 5V on C and a black wire to GND on A. This powers the board. Connect the other side of these wires to the LED strip. Make sure you know how to position the board and use lengths accordingly. Initially I had the board flipped over the long side, but this is better for accessibility.
 
-Pin 19 and 20 make up the clock and data. These need also be soldered to the LED strip. Best to use the same colors as used for connecting the parts of the LED strip (green for clock, blue for data).
+Pin 19 and 20 make up the clock and data. These also need be soldered to the LED strip. Best to use the same colors as used for connecting the parts of the LED strip (green for clock, blue for data).
 
-The light sensor uses header A connected like: `3.3V - LDR - SENSOR - 4K7 - GND`. Orange represents 3V3, purple the data and brown ground. Connect as specified and use shrinking material or tape to isolate.
+The light sensor uses header A connected like `3.3V - LDR - SENSOR - 4K7 - GND`. Orange represents 3V3, purple the data, and brown the ground. Connect as specified and use shrinking material or tape to isolate.
 
-The yellow wire is connected to the switch for `select` and green for `next`. The switches should be connected to ground on the other terminal. On the picture, this is also a brown wire, which is connected to the LED strip.
+The yellow wire is connected to the switch for `select` and green for `next`. The switches should be connected to ground on the other terminal. In the picture, this is also a brown wire, which is connected to the LED strip.
 
 Make sure all wires can be nicely placed flat enough for the placement of the control layer.
 
 The layout of your ESP can be found online. For example:
-![ESP C6 pinout](images/ESP32-C6.jpg "Credits unknown")
+![ESP C6 pinout](images/ESP32-C6.jpg "Credit are unknown")
 
 The result is something like this:
 ![Connecting ESP](images/ESP-wiring.jpg "The fourth step")
 
 ## Control layer and front plate
 
-Guide all wires for the ESP, switches and sensor though the large open section and make sure the control layer is placed flat on the LED layer. Fixate the three layers. For example, use bolts and nuts. Make sure the front is flat by sinking the bolt head in the wood. Drill very carefully.
+Guide all wires for the ESP, switches, and sensor through the large open section and make sure the control layer is placed flat on the LED layer. Fixate the three layers. For example, use bolts and nuts. Make sure the front is flat by sinking the bolt head in the wood. Drill very carefully.
 
-Attach the ESP if you didn't already do that and use tape to make sure the front is flat. This takes some fitting, nudging and tweaking.
+Attach the ESP if you didn't already do that and use tape to make sure the front is flat. This takes some fitting, nudging, and tweaking.
 
-Test the clock, make sure it is working.
+Test the clock; make sure it is working.
 
 Optionally add the switches and the light sensor. 
 
-Paint the front plate in the color of your choice. Black is safe and beautiful. Let it dry and lasercut it. Spray-glue the back and attach the tracing paper (this paper diffuses the light, you need it!).
+Paint the front plate in the color of your choice. Black is safe and beautiful. Let it dry and laser cut it. Spray glue the back and attach the tracing paper (this paper diffuses the light; you need it!).
 
 The result is something like this:
 ![Control layer attached](images/ledboard.jpg "The fifth step")
 
 ## Frame
 
-For this you can use a hardwood slat of about 28 by 9 millimeters. A groove is milled using a wood router. This groove should exactly match the thickness of the clock. 
+For this, you can use a hardwood slat of about 28 by 9 millimeters. A groove is milled using a wood router. This groove should exactly match the thickness of the clock. 
 
-![Milled slat](images/milled.jpg "The sixth step")
+![Milled slate](images/milled.jpg "The sixth step")
 
-Use a miter saw or chop saw to make the frame pieces. Apply some slack as you can always make the pieces a little shorter. As my front plate was a little askew, I needed a couple of millimeters extra. Cut out holes for the power plug and the light sensor. Optionally, cut out holes for the switches. Measure and match the pieces and mark them if necessary.
+Use a miter saw or chop saw to make the frame pieces. Apply some slack, as you can always make the pieces a little shorter. As my front plate was a little askew, I needed a couple of millimeters extra. Cut out holes for the power plug and the light sensor. Optionally, cut out holes for the switches. Measure and match the pieces and mark them if necessary.
 
-Paint in the color of your liking. Test the clock for a last time. Use wood glue to make the frame. Do not apply glue at the front side. Since the frame does not have to hold any weight, you should not glue the frame to the clock.
+Paint in the color of your liking. Test the clock for a last time. Use wood glue to make the frame. Do not apply glue on the front side. Since the frame does not have to hold any weight, you should not glue the frame to the clock.
 
 Create a hanging hook or create a stand.
 
@@ -92,4 +92,4 @@ Done!
 
 ![Ready and on](images/clock_on.jpg "Done 2")
 
-<small>Note: The switched off characters are far more visible in the photograph than actually perceived.</small>
+<small>Note: The switched-off characters are far more visible in the photograph than actually perceived.</small>

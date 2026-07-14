@@ -3,6 +3,8 @@
 
 #include <FastLED.h>
 
+#include "settings.h"
+
 class StatusOption {
     int pick;
     int day = 0;
@@ -21,6 +23,12 @@ class StatusOption {
     }
 
     CRGB getColorFor(int idx, CRGB tickColor, CRGB clockColor) {
+        bool matchAlert = idx > 3 && idx < 9;
+        bool useDate = true;
+#ifdef EN_CLOCK_FACE
+        matchAlert = idx <= 3 || idx >= 9;
+        useDate = false;
+#endif
         switch (pick) {
             case Default:
                 return idx % 2 == 1 ? CRGB(0xFF890E) : CRGB::Black;
@@ -29,13 +37,13 @@ class StatusOption {
             case Clock:
                 return clockColor;
             case NoAlert:
-                return (idx > 3 && idx < 9) ? CRGB(0x43FF06) : CRGB::Black;
+                return matchAlert ? CRGB(0x43FF06) : CRGB::Black;
             case MildAlert:
-                return (idx > 3 && idx < 9) ? CRGB(0xFFA009) : CRGB::Black;
+                return matchAlert ? CRGB(0xFFA009) : CRGB::Black;
             case HighAlert:
-                return (idx > 3 && idx < 9) ? CRGB(0xFF1900) : CRGB::Black;
+                return matchAlert ? CRGB(0xFF1900) : CRGB::Black;
             case Date:
-                return getDateBitColor(idx, tickColor);
+                return useDate ? getDateBitColor(idx, tickColor) : CRGB::Black;
             case Individual:
             default:
                 return CRGB::Black;
@@ -44,7 +52,7 @@ class StatusOption {
 
     bool isAnimated() { return pick == MildAlert || pick == HighAlert; }
 
-    static const char* getAsString() { return "Default;Individual;Tick;Clock;No Alert;Mild Alert;High Alert;Date"; }
+    static const char* getAsString() { return TXT_STAT_OPTIONS; }
     static const int Default = 0;
     static const int Individual = 1;
     static const int Tick = 2;

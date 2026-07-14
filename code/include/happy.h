@@ -9,10 +9,12 @@
 #define FONT_HEIGHT 7
 #define FONT_WIDTH 5
 
-#define WORD_EN1_SIZE 5
-#define WORD_EN2_SIZE 8
+#ifdef EN_BIRTHDAY
 
-const uint8_t word_en1[] = {
+#define WORD1_SIZE 5
+#define WORD2_SIZE 8
+
+const uint8_t WORD1[] = {
     0x88, 0x88, 0x88, 0xf8, 0x88, 0x88, 0x88,  // Code for char H
     0x00, 0x00, 0x70, 0x88, 0x88, 0x98, 0x68,  // Code for char a
     0xf0, 0x88, 0x88, 0xc8, 0xb0, 0x80, 0x80,  // Code for char p
@@ -20,7 +22,7 @@ const uint8_t word_en1[] = {
     0x88, 0x88, 0x88, 0x98, 0x68, 0x08, 0x70,  // Code for char y
 };
 
-const uint8_t word_en2[] = {
+const uint8_t WORD2[] = {
     0xf0, 0x88, 0x88, 0xf0, 0x88, 0x88, 0xf0,  // Code for char B
     0x20, 0x00, 0x60, 0x20, 0x20, 0x20, 0x70,  // Code for char i
     0x00, 0x00, 0xa0, 0xd0, 0x80, 0x80, 0x80,  // Code for char r
@@ -30,11 +32,14 @@ const uint8_t word_en2[] = {
     0x00, 0x00, 0x70, 0x88, 0x88, 0x98, 0x68,  // Code for char a
     0x88, 0x88, 0x88, 0x98, 0x68, 0x08, 0x70,  // Code for char y
 };
+#endif
 
-#define WORD_NL1_SIZE 9
-#define WORD_NL2_SIZE 13
+#ifdef NL_BIRTHDAY
 
-const uint8_t word_nl1[] = {
+#define WORD1_SIZE 9
+#define WORD2_SIZE 13
+
+const uint8_t WORD1[] = {
     0x88, 0x88, 0x88, 0xf8, 0x88, 0x88, 0x88,  // Code for char H
     0x00, 0x00, 0x70, 0x88, 0x88, 0x98, 0x68,  // Code for char a
     0x00, 0x00, 0xa0, 0xd0, 0x80, 0x80, 0x80,  // Code for char r
@@ -46,7 +51,7 @@ const uint8_t word_nl1[] = {
     0x80, 0x80, 0x88, 0x90, 0xa0, 0xd0, 0x88,  // Code for char k
 };
 
-const uint8_t word_nl2[] = {
+const uint8_t WORD2[] = {
     0x70, 0x88, 0x80, 0xb8, 0x88, 0x88, 0x78,  // Code for char G
     0x00, 0x00, 0x70, 0x88, 0xf8, 0x80, 0x70,  // Code for char e
     0x30, 0x40, 0xe0, 0x40, 0x40, 0x40, 0x40,  // Code for char f
@@ -61,31 +66,14 @@ const uint8_t word_nl2[] = {
     0x00, 0x00, 0xa0, 0xd0, 0x80, 0x80, 0x80,  // Code for char r
     0x08, 0x08, 0x68, 0x98, 0x88, 0x88, 0x78,  // Code for char d
 };
+#endif
 
 class Happy {
    public:
-    int sizeW1;
-    int sizeW2;
-    const uint8_t* word1 = NULL;
-    const uint8_t* word2 = NULL;
-
-    Happy() {
-        switch (language) {
-            case 1:
-                sizeW1 = WORD_NL1_SIZE;
-                sizeW2 = WORD_NL2_SIZE;
-                word1 = word_nl1;
-                word2 = word_nl2;
-                break;
-            case 0:
-            default:
-                sizeW1 = WORD_EN1_SIZE;
-                sizeW2 = WORD_EN2_SIZE;
-                word1 = word_en1;
-                word2 = word_en2;
-                break;
-        }
-    }
+    int sizeW1 = WORD1_SIZE;
+    int sizeW2 = WORD2_SIZE;
+    const uint8_t* word1 = WORD1;
+    const uint8_t* word2 = WORD2;
 };
 
 #endif
